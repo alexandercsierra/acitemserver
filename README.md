@@ -5,8 +5,8 @@
 | :----: | :---- | :---- | :---- |
 | GET | /api/search | Get all items  | |
 | POST | /api/search/:id | Add an item | id, item object |
-| PUT | /api/users/:id | Edit item | id, item object |
-| DELETE | /api/users/:id | Delete an item |  |
+| PUT | /api/search/:id | Edit item | id, item object |
+| DELETE | /api/search/:id | Delete an item |  |
 
 
 
