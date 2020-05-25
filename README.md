@@ -1,114 +1,43 @@
-# Template Server for authentication with JSON Web Tokens (JWTs) 
+# Animal Crossing Item Server 
 
 
 | Method | Endpoint | Description | Required |
 | :----: | :---- | :---- | :---- |
-| POST | /api/auth/register | Register a user.  | user object |
-| POST | /api/auth/login | Login, generates a token | user object |
-| GET | /api/users | Get a list of users | token |
-| GET | /api/users/:id | Get a user by an identifier | token |
+| GET | /api/search | Get all items  | |
+| POST | /api/search/:id | Add an item | id, item object |
+| PUT | /api/users/:id | Edit item | id, item object |
+| DELETE | /api/users/:id | Delete an item |  |
 
 
 
-### Sample user object:
+### Sample item object:
 ```javascript
 {
-    "username": "bob1234",
-    "password": "pass5940"
+    "name": "Common Butterfly",
+    "price": 300,
+    "category":"bug",
+    "startMonth": "jan",
+    "endMonth": "feb",
+    "startTime": 800,
+    "endTime": 1300,
+    "conditions": "rainy"
 }
 ```
 
-
-### .env
-```javascript
-DB_ENV=development
-
-DATABASE_URL=postgresql://postgres:yourpassword@localhost/dbname
-```
-
-### knexfile.js
-
-```javascript
-module.exports = {
-
-  development: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL,
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      directory: './data/migrations',
-      tableName: 'knex_migrations'
-    }
-  },
-
-  testing: {
-    client: 'pg',
-    connection: 'postgresql://localhost/dbname',
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      directory: './data/migrations',
-      tableName: 'knex_migrations'
-    }
-  },
-
-  production: {
-    client: 'pg',
-    connection: "",
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      directory: './data/migrations',
-      tableName: 'knex_migrations'
-    }
-  }
-
-};
-```
-
-### sample tests
-```javascript
-const request = require('supertest');
-const server = require('../api/server');
-
-describe('cohorts router', function(){
-   it('should run the tests', function(){
-       expect(true).toBe(true);
-   })
+## Adding an item
 
 
-    describe('GET /', function(){
-        it('should return 200 OK', function(){
-            return request(server).get('/api/cohorts')
-                .then(res=>{
-                    expect(res.status).toBe(200);
-                })
-        })
-
-        it ('should return an array of cohorts as the router value', function(){
-            return request(server).get('/api/cohorts').then(res=>{
-                expect(Array.isArray(res.body)).toBe(true)
-            })
-        })
-
-        it ('should return json', function(){
-            return request(server).get('/api/cohorts').then(res=>{
-                expect(res.type).toMatch(/json/)
-            })
-        })
-
-    })
+|Property| Required? | Type|
+|:-----|:-----:|:-----|
+|name| YES| string| 
+|price| YES| integer|
+|category| YES | string| 
+|startMonth|NO| string|
+|endMonth|NO|string|
+|startTime| NO| integer|
+|endTime| NO| integer|
+|conditions|NO|string|
 
 
-
-})
-```
 
 
